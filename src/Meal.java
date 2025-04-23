@@ -18,8 +18,6 @@ public abstract class Meal {
 
     public abstract boolean isHealthy();
 
-    public abstract boolean isGoodTime();
-
     public abstract String getSummary();
 
     public String getName() {
