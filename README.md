@@ -6,4 +6,4 @@ See instructions [here](INSTRUCTIONS.md) for details.
 *INSERT UML CLASS DIAGRAM HERE*  
 
 ## Summary
-*Write a brief summary that describes the real-world system you are modelling in your design.*
+This design models a person's daily meal system. It will handle the type of meal (breakfast, lunch, dinner and snack) and the meal's details (calories, food groups, time of eating). The system will determine if the user's meal is balenced / healthy.
