@@ -18,7 +18,7 @@ public abstract class Meal {
 
     public abstract boolean isHealthy();
 
-    public abstract String getSummary();
+    public abstract String getMeal();
 
     public String getName() {
         return name;

@@ -4,8 +4,9 @@
  * @author NJudd
  */
 public class Breakfast extends Meal {
-    private final int healthyCals = 500;
-    private final int healthyFoodGroups = 3;
+    private final int healthCalsMax = 500;
+    private final int healthCalsMin = 300;
+    private final int healthFoodGroups = 3;
 
     public Breakfast(String name, String time, int calories, int foodGroups) {
         super(name, time, calories, foodGroups);
@@ -13,7 +14,7 @@ public class Breakfast extends Meal {
 
     @Override
     public boolean isHealthy() {
-        if (getCalories() <= healthyCals && getFoodGroups() >= healthyFoodGroups) {
+        if (getCalories() <= healthCalsMax && getFoodGroups() >= healthFoodGroups && getCalories() >= healthCalsMin) {
             return true;
         } else {
             return false;
@@ -21,7 +22,7 @@ public class Breakfast extends Meal {
     }
 
     @Override
-    public String getSummary() {
+    public String getMeal() {
         return "[" + getTime() + "] Breakfast: " + getName() + "(" + getCalories() + ")";
     }
 }
