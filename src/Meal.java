@@ -31,12 +31,7 @@ public abstract class Meal {
      */
     public abstract boolean isHealthy();
 
-    /**
-     * Returns a summary of a meal/meal details
-     * 
-     * @return meal summary
-     */
-    public abstract String getMeal();
+    public abstract String toString();
 
     /**
      * Returns the name of a meal

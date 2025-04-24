@@ -30,7 +30,7 @@ public class Lunch extends Meal {
     }
 
     @Override
-    public String getMeal() {
+    public String toString() {
         return "[" + getTime() + "] Lunch: " + getName() + "(" + getCalories() + ")";
     }
 
