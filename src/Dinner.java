@@ -1,5 +1,5 @@
 /**
- * The dinner class
+ * The dinner class: a type of meal
  * 
  * @author NJudd
  */

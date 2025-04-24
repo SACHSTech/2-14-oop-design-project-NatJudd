@@ -1,5 +1,5 @@
 /**
- * The snack class
+ * The snack class: a type of meal
  * 
  * @author NJudd
  */

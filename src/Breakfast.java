@@ -1,5 +1,5 @@
 /**
- * The breakfast class
+ * The breakfast class: a type of meal
  * 
  * @author NJudd
  */

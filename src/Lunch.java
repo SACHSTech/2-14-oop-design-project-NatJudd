@@ -1,5 +1,5 @@
 /**
- * The lunch class
+ * The lunch class: a type of meal
  * 
  * @author NJudd
  */

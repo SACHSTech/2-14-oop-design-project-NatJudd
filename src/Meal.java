@@ -1,5 +1,5 @@
 /**
- * The meal class
+ * The meal class: represents the details/macros that a person eats in a meal
  * 
  * @author NJudd
  */
