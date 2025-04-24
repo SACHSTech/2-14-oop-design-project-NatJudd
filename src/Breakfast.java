@@ -8,6 +8,14 @@ public class Breakfast extends Meal {
     private final int healthCalsMin = 300;
     private final int healthFoodGroups = 3;
 
+    /**
+     * Constructor
+     * 
+     * @param name       meal name
+     * @param time       meal time
+     * @param calories   amount of calories
+     * @param foodGroups amount of foodgroups
+     */
     public Breakfast(String name, String time, int calories, int foodGroups) {
         super(name, time, calories, foodGroups);
     }
