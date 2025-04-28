@@ -25,9 +25,11 @@ public class UserInputProcessor {
                 addNewDrink(s);
                 x = "";
             } else if (x.equals("no")) {
+                System.out.println();
                 break;
             }
         }
+        printTracker();
     }
 
     /**
@@ -75,5 +77,23 @@ public class UserInputProcessor {
         Drink drink = new Drink(name, volume);
         track.addDrink(drink);
         System.out.println("Your drink has been added!");
+    }
+
+    /**
+     * Prints all the meals and drinks the user added
+     */
+    public void printTracker() {
+        System.out.println("Meals: ");
+
+        for (int i = 0; i < track.getMeals().size(); i++) {
+            System.out.println(track.getMeals().get(i));
+        }
+
+        System.out.println();
+        System.out.println("Drinks: ");
+
+        for (int i = 0; i < track.getDrinks().size(); i++) {
+            System.out.println(track.getDrinks().get(i));
+        }
     }
 }
