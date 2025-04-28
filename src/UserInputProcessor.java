@@ -111,10 +111,38 @@ public class UserInputProcessor {
         for (int i = 0; i < track.getDrinks().size(); i++) {
             System.out.println(track.getDrinks().get(i));
         }
+
+        System.out.println();
     }
 
-    public boolean isDayHealthy() {
-        return true;
+    /**
+     * Checks if what the user ate is healthy or not
+     */
+    public void isDayHealthy() {
+        int healthy = 0;
+        int unhealthy = 0;
+
+        for (int i = 0; i < track.getMeals().size(); i++) {
+            if (track.getMeals().get(i).isHealthy()) {
+                healthy += 1;
+            } else {
+                unhealthy += 1;
+            }
+        }
+
+        for (int i = 0; i < track.getDrinks().size(); i++) {
+            if (track.getDrinks().get(i).isWater()) {
+                healthy += 1;
+            } else {
+                unhealthy += 1;
+            }
+        }
+
+        if (healthy >= unhealthy) {
+            System.out.println("You ate healthy today!");
+        } else {
+            System.out.println("You might want to start thinking about eating healthier :(");
+        }
     }
 
     /**
