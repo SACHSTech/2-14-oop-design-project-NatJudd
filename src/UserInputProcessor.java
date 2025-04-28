@@ -30,6 +30,22 @@ public class UserInputProcessor {
             }
         }
         printTracker();
+
+        while (true) {
+            System.out.print("Would you like to check if your day or meal was healthy? ('day' or 'meal' or 'no'): ");
+            String x = s.nextLine().toLowerCase();
+
+            if (x.equals("day")) {
+                isDayHealthy();
+                x = "";
+            } else if (x.equals("meal")) {
+                isMealHealthy(s);
+                x = "";
+            } else if (x.equals("no")) {
+                System.out.println();
+                break;
+            }
+        }
     }
 
     /**
@@ -86,7 +102,7 @@ public class UserInputProcessor {
         System.out.println("Meals: ");
 
         for (int i = 0; i < track.getMeals().size(); i++) {
-            System.out.println(track.getMeals().get(i));
+            System.out.println(i + 1 + ". " + track.getMeals().get(i));
         }
 
         System.out.println();
@@ -95,5 +111,26 @@ public class UserInputProcessor {
         for (int i = 0; i < track.getDrinks().size(); i++) {
             System.out.println(track.getDrinks().get(i));
         }
+    }
+
+    public boolean isDayHealthy() {
+        return true;
+    }
+
+    /**
+     * Checks if the meal a user chooses is healthy
+     * 
+     * @param s scanner
+     */
+    public void isMealHealthy(Scanner s) {
+        System.out.print("Enter the number of the meal you would like to check: ");
+        int meal = Integer.parseInt(s.nextLine()) - 1;
+
+        if (track.getMeals().get(meal).isHealthy()) {
+            System.out.println(track.getMeals().get(meal) + " is healthy");
+        } else {
+            System.out.println(track.getMeals().get(meal) + " is unhealthy");
+        }
+
     }
 }
