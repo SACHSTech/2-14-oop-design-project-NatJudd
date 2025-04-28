@@ -47,6 +47,13 @@ public class UserInputProcessor {
     }
 
     public void addNewDrink(Scanner s) {
+        System.out.print("Enter the name of your drink: ");
+        String name = s.nextLine();
+        System.out.print("Enter the size of your drink (milliliters): ");
+        int volume = Integer.parseInt(s.nextLine());
 
+        Drink drink = new Drink(name, volume);
+        track.addDrink(drink);
+        System.out.println("Your drink has been added!");
     }
 }
