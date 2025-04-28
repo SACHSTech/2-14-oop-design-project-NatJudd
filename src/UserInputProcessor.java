@@ -1,8 +1,18 @@
 import java.util.Scanner;
 
+/**
+ * UserInputProcessor class: has methods to prompt and recieve user input.
+ * 
+ * @author NJudd
+ */
 public class UserInputProcessor {
     private Tracker track = new Tracker();
 
+    /**
+     * Prompts the user to either add a meal, drink, or exit
+     * 
+     * @param s scanner
+     */
     public void promptUser(Scanner s) {
         while (true) {
             System.out.print("Would you like to add a meal or drink? ('meal' or 'drink' or 'no'): ");
@@ -20,6 +30,11 @@ public class UserInputProcessor {
         }
     }
 
+    /**
+     * Prompts the user for elements of their meal then adds the meal
+     * 
+     * @param s scanner
+     */
     public void addNewMeal(Scanner s) {
         System.out.print("What type of meal are you having? ('breakfast' or 'lunch' or 'dinner' or 'snack'): ");
         String type = s.nextLine().toLowerCase();
@@ -46,6 +61,11 @@ public class UserInputProcessor {
         System.out.println("Your meal has been added!");
     }
 
+    /**
+     * Prompts the user for elements of their drink then adds the drink
+     * 
+     * @param s scanner
+     */
     public void addNewDrink(Scanner s) {
         System.out.print("Enter the name of your drink: ");
         String name = s.nextLine();
