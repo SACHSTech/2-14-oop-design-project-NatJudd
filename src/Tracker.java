@@ -28,4 +28,11 @@ public class Tracker {
         drinks.add(e);
     }
 
+    public List<Meal> getMeals() {
+        return meals;
+    }
+
+    public List<Drink> getDrinks() {
+        return drinks;
+    }
 }
