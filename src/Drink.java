@@ -46,6 +46,6 @@ public class Drink {
     }
 
     public String toString() {
-        return "Drink: " + getName() + "(" + getVolume() + " ml)";
+        return name.substring(0, 1).toUpperCase() + name.substring(1) + ": (" + volume + " ml)";
     }
 }
