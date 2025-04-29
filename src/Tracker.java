@@ -36,7 +36,7 @@ public class Tracker {
      * @param time       meal time
      * @param calories   meal calories
      * @param foodGroups meal foodgroups
-     * @return the meal object
+     * @return meal object
      */
     public Meal makeMeal(String type, String name, String time, int calories, int foodGroups) {
         Meal meal = null;
@@ -51,6 +51,17 @@ public class Tracker {
         }
 
         return meal;
+    }
+
+    /**
+     * Turns String and int inputs into a drink object
+     * 
+     * @param name   drink name
+     * @param volume drink volume
+     * @return drink object
+     */
+    public Drink makeDrink(String name, int volume) {
+        return new Drink(name, volume);
     }
 
     public List<Meal> getMeals() {

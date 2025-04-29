@@ -88,8 +88,7 @@ public class UserInputProcessor {
         System.out.print("Enter the size of your drink (milliliters): ");
         int volume = Integer.parseInt(s.nextLine());
 
-        Drink drink = new Drink(name, volume);
-        track.addDrink(drink);
+        track.addDrink(track.makeDrink(name, volume));
         System.out.println("Your drink has been added!");
     }
 
