@@ -7,30 +7,42 @@ import java.util.Scanner;
  */
 public class UserInputProcessor {
     private Tracker track = new Tracker();
+    private Scanner s = new Scanner(System.in);
 
     /**
      * Prompts the user to either add a meal, drink, or exit
-     * 
-     * @param s scanner
      */
-    public void promptUser(Scanner s) {
+    public void promptUser() {
+        newItemPrompt();
+        printTracker();
+        isHealthyPrompt();
+    }
+
+    /**
+     * Prompts the user to add new meals or drink until the user inputs 'no'
+     */
+    public void newItemPrompt() {
         while (true) {
             System.out.print("Would you like to add a meal or drink? ('meal' or 'drink' or 'no'): ");
             String x = s.nextLine().toLowerCase();
 
             if (x.equals("meal")) {
-                addNewMeal(s);
+                addNewMeal();
                 x = "";
             } else if (x.equals("drink")) {
-                addNewDrink(s);
+                addNewDrink();
                 x = "";
             } else if (x.equals("no")) {
                 System.out.println();
                 break;
             }
         }
-        printTracker();
+    }
 
+    /**
+     * Asks the user if they want to check if a meal or their day was healthy
+     */
+    public void isHealthyPrompt() {
         while (true) {
             System.out.print("Would you like to check if your day or meal was healthy? ('day' or 'meal' or 'no'): ");
             String x = s.nextLine().toLowerCase();
@@ -39,7 +51,7 @@ public class UserInputProcessor {
                 isDayHealthy();
                 x = "";
             } else if (x.equals("meal")) {
-                isMealHealthy(s);
+                isMealHealthy();
                 x = "";
             } else if (x.equals("no")) {
                 System.out.println();
@@ -50,10 +62,8 @@ public class UserInputProcessor {
 
     /**
      * Prompts the user for elements of their meal then adds the meal
-     * 
-     * @param s scanner
      */
-    public void addNewMeal(Scanner s) {
+    public void addNewMeal() {
         System.out.print("What type of meal are you having? ('breakfast' or 'lunch' or 'dinner' or 'snack'): ");
         String type = s.nextLine().toLowerCase();
         System.out.print("Enter the name of your meal: ");
@@ -81,10 +91,8 @@ public class UserInputProcessor {
 
     /**
      * Prompts the user for elements of their drink then adds the drink
-     * 
-     * @param s scanner
      */
-    public void addNewDrink(Scanner s) {
+    public void addNewDrink() {
         System.out.print("Enter the name of your drink: ");
         String name = s.nextLine();
         System.out.print("Enter the size of your drink (milliliters): ");
@@ -117,8 +125,10 @@ public class UserInputProcessor {
 
     /**
      * Checks if what the user ate is healthy or not
+     * 
+     * @return if the day is healthy or not
      */
-    public void isDayHealthy() {
+    public boolean isDayHealthy() {
         int healthy = 0;
         int unhealthy = 0;
 
@@ -140,24 +150,28 @@ public class UserInputProcessor {
 
         if (healthy >= unhealthy) {
             System.out.println("You ate healthy today!");
+            return true;
         } else {
             System.out.println("You might want to start thinking about eating healthier :(");
+            return false;
         }
     }
 
     /**
      * Checks if the meal a user chooses is healthy
      * 
-     * @param s scanner
+     * @return if the meal is healthy or not
      */
-    public void isMealHealthy(Scanner s) {
+    public boolean isMealHealthy() {
         System.out.print("Enter the number of the meal you would like to check: ");
         int meal = Integer.parseInt(s.nextLine()) - 1;
 
         if (track.getMeals().get(meal).isHealthy()) {
             System.out.println(track.getMeals().get(meal) + " is healthy");
+            return true;
         } else {
             System.out.println(track.getMeals().get(meal) + " is unhealthy");
+            return false;
         }
 
     }
