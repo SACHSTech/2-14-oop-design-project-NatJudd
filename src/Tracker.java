@@ -64,6 +64,60 @@ public class Tracker {
         return new Drink(name, volume);
     }
 
+    /**
+     * Prints all the meals and drinks the user added
+     */
+    public void printTracker() {
+        System.out.println("Meals: ");
+
+        for (int i = 0; i < getMeals().size(); i++) {
+            System.out.println(i + 1 + ". " + getMeals().get(i));
+        }
+
+        System.out.println();
+        System.out.println("Drinks: ");
+
+        for (int i = 0; i < getDrinks().size(); i++) {
+            System.out.println(getDrinks().get(i));
+        }
+
+        System.out.println();
+    }
+
+    /**
+     * Checks if what the user ate is healthy or not
+     * 
+     * @return if the day is healthy or not
+     */
+    public boolean isDayHealthy() {
+        int healthy = 0;
+        int unhealthy = 0;
+
+        for (int i = 0; i < getMeals().size(); i++) {
+            if (getMeals().get(i).isHealthy()) {
+                healthy += 1;
+            } else {
+                unhealthy += 1;
+            }
+        }
+
+        for (int i = 0; i < getDrinks().size(); i++) {
+            if (getDrinks().get(i).isWater()) {
+                healthy += 1;
+            } else {
+                unhealthy += 1;
+            }
+        }
+
+        if (healthy >= unhealthy) {
+            System.out.println("You ate healthy today!");
+            return true;
+        } else {
+            System.out.println("You might want to start thinking about eating healthier :(");
+            return false;
+        }
+    }
+
     public List<Meal> getMeals() {
         return meals;
     }

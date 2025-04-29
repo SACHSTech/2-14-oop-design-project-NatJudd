@@ -14,7 +14,7 @@ public class UserInputProcessor {
      */
     public void promptUser() {
         newItemPrompt();
-        printTracker();
+        track.printTracker();
         isHealthyPrompt();
     }
 
@@ -48,7 +48,7 @@ public class UserInputProcessor {
             String x = s.nextLine().toLowerCase();
 
             if (x.equals("day")) {
-                isDayHealthy();
+                track.isDayHealthy();
                 x = "";
             } else if (x.equals("meal")) {
                 isMealHealthy();
@@ -93,60 +93,6 @@ public class UserInputProcessor {
     }
 
     /**
-     * Prints all the meals and drinks the user added
-     */
-    public void printTracker() {
-        System.out.println("Meals: ");
-
-        for (int i = 0; i < track.getMeals().size(); i++) {
-            System.out.println(i + 1 + ". " + track.getMeals().get(i));
-        }
-
-        System.out.println();
-        System.out.println("Drinks: ");
-
-        for (int i = 0; i < track.getDrinks().size(); i++) {
-            System.out.println(track.getDrinks().get(i));
-        }
-
-        System.out.println();
-    }
-
-    /**
-     * Checks if what the user ate is healthy or not
-     * 
-     * @return if the day is healthy or not
-     */
-    public boolean isDayHealthy() {
-        int healthy = 0;
-        int unhealthy = 0;
-
-        for (int i = 0; i < track.getMeals().size(); i++) {
-            if (track.getMeals().get(i).isHealthy()) {
-                healthy += 1;
-            } else {
-                unhealthy += 1;
-            }
-        }
-
-        for (int i = 0; i < track.getDrinks().size(); i++) {
-            if (track.getDrinks().get(i).isWater()) {
-                healthy += 1;
-            } else {
-                unhealthy += 1;
-            }
-        }
-
-        if (healthy >= unhealthy) {
-            System.out.println("You ate healthy today!");
-            return true;
-        } else {
-            System.out.println("You might want to start thinking about eating healthier :(");
-            return false;
-        }
-    }
-
-    /**
      * Checks if the meal a user chooses is healthy
      * 
      * @return if the meal is healthy or not
@@ -164,7 +110,6 @@ public class UserInputProcessor {
             System.out.println(getHealthReason(meal));
             return false;
         }
-
     }
 
     /**
