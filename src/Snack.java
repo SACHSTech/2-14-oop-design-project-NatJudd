@@ -30,11 +30,15 @@ public class Snack extends Meal {
 
     @Override
     public String healthReason() {
+        String reason = "";
         if (getCalories() > healthCalsMax) {
-            return "Your meal is " + (getCalories() - healthCalsMax) + " calories over the maximum";
-        } else {
-            return "Your meal has " + (healthFoodGroups - getFoodGroups()) + " too little foodgroups";
+            reason += "\nYour meal is " + (getCalories() - healthCalsMax) + " calories over the maximum";
+        } 
+        if (getFoodGroups() < healthFoodGroups) {
+            reason += "\nYour meal has " + (healthFoodGroups - getFoodGroups()) + " too little foodgroups";
         }
+
+        return reason;
     }
 
     @Override

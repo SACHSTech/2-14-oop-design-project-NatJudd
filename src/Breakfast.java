@@ -31,13 +31,18 @@ public class Breakfast extends Meal {
 
     @Override
     public String healthReason() {
+        String reason = "";
         if (getCalories() > healthCalsMax) {
-            return "Your meal is " + (getCalories() - healthCalsMax) + " calories over the maximum";
-        } else if (getCalories() < healthCalsMin) {
-            return "Your meal is " + (healthCalsMin - getCalories()) + " calories under the minimum";
-        } else {
-            return "Your meal has " + (healthFoodGroups - getFoodGroups()) + " too little foodgroups";
+            reason += "\nYour meal is " + (getCalories() - healthCalsMax) + " calories over the maximum";
+        } 
+        if (getCalories() < healthCalsMin) {
+            reason += "\nYour meal is " + (healthCalsMin - getCalories()) + " calories under the minimum";
+        } 
+        if (getFoodGroups() < healthFoodGroups) {
+            reason += "\nYour meal has " + (healthFoodGroups - getFoodGroups()) + " too little foodgroups";
         }
+
+        return reason;
     }
 
     @Override
