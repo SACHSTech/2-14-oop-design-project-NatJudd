@@ -30,6 +30,17 @@ public class Dinner extends Meal {
     }
 
     @Override
+    public String healthReason() {
+        if (getCalories() > healthCalsMax) {
+            return "Your meal is " + (getCalories() - healthCalsMax) + " calories over the maximum";
+        } else if (getCalories() < healthCalsMin) {
+            return "Your meal is " + (healthCalsMin - getCalories()) + " calories under the minimum";
+        } else {
+            return "Your meal has " + (healthFoodGroups - getFoodGroups()) + " too little foodgroups";
+        }
+    }
+
+    @Override
     public String toString() {
         return "[" + getTime() + "] Dinner: " + getName() + "(" + getCalories() + ")";
     }

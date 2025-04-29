@@ -31,6 +31,13 @@ public abstract class Meal {
      */
     public abstract boolean isHealthy();
 
+    /**
+     * Returns the reason a meal was determined unhealthy
+     * 
+     * @return reason a meal is unhealthy
+     */
+    public abstract String healthReason();
+
     public abstract String toString();
 
     /**
