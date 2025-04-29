@@ -75,17 +75,7 @@ public class UserInputProcessor {
         System.out.print("Enter the amount of foodgroups in your meal: ");
         int foodGroups = Integer.parseInt(s.nextLine());
 
-        Meal meal = null;
-        if (type.equals("breakfast")) {
-            meal = new Breakfast(name, time, calories, foodGroups);
-        } else if (type.equals("lunch")) {
-            meal = new Lunch(name, time, calories, foodGroups);
-        } else if (type.equals("dinner")) {
-            meal = new Dinner(name, time, calories, foodGroups);
-        } else if (type.equals("snack")) {
-            meal = new Snack(name, time, calories, foodGroups);
-        }
-        track.addMeal(meal);
+        track.addMeal(track.makeMeal(type, name, time, calories, foodGroups));
         System.out.println("Your meal has been added!");
     }
 

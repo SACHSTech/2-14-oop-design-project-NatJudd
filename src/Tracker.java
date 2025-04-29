@@ -28,6 +28,31 @@ public class Tracker {
         drinks.add(e);
     }
 
+    /**
+     * Turns String and int inputs into a meal object
+     * 
+     * @param type       meal type
+     * @param name       meal name
+     * @param time       meal time
+     * @param calories   meal calories
+     * @param foodGroups meal foodgroups
+     * @return the meal object
+     */
+    public Meal makeMeal(String type, String name, String time, int calories, int foodGroups) {
+        Meal meal = null;
+        if (type.equals("breakfast")) {
+            meal = new Breakfast(name, time, calories, foodGroups);
+        } else if (type.equals("lunch")) {
+            meal = new Lunch(name, time, calories, foodGroups);
+        } else if (type.equals("dinner")) {
+            meal = new Dinner(name, time, calories, foodGroups);
+        } else if (type.equals("snack")) {
+            meal = new Snack(name, time, calories, foodGroups);
+        }
+
+        return meal;
+    }
+
     public List<Meal> getMeals() {
         return meals;
     }
