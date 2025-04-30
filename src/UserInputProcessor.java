@@ -97,18 +97,13 @@ public class UserInputProcessor {
      * 
      * @return if the meal is healthy or not
      */
-    public boolean isMealHealthy() {
+    public void isMealHealthy() {
         System.out.print("Enter the number of the meal you would like to check: ");
         int meal = Integer.parseInt(s.nextLine()) - 1;
         System.out.println();
-
-        if (track.getMeals().get(meal).isHealthy()) {
-            System.out.println(track.getMeals().get(meal) + " is healthy");
-            return true;
-        } else {
-            System.out.println(track.getMeals().get(meal) + " is unhealthy");
-            System.out.println(getHealthReason(meal));
-            return false;
+        boolean health = track.printMealHealth(meal);
+        if (!health) {
+            getHealthReason(meal);
         }
     }
 
@@ -118,14 +113,13 @@ public class UserInputProcessor {
      * @param meal the index of the meal being checked
      * @return the reason a meal is unhealthy
      */
-    public String getHealthReason(int meal) {
+    public void getHealthReason(int meal) {
         System.out.println();
         System.out.print("Would you like to know why your meal is unhealthy? ('yes' or 'no') ");
         String answer = s.nextLine().toLowerCase();
 
         if (answer.equals("yes")) {
-            return track.getMeals().get(meal).healthReason();
+            System.out.println(track.getMeals().get(meal).healthReason());
         }
-        return "Too bad :(";
     }
 }

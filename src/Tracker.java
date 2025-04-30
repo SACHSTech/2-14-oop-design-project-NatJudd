@@ -118,10 +118,45 @@ public class Tracker {
         }
     }
 
+    /**
+     * Checks if the meal a user chooses is healthy
+     * 
+     * @return if the meal is healthy or not
+     */
+    public boolean printMealHealth(int index) {
+        if (getMeal(index).isHealthy()) {
+            System.out.println(getMeal(index) + " is healthy");
+            return true;
+        } else {
+            System.out.println(getMeal(index) + " is unhealthy");
+            return false;
+        }
+    }
+
+    /**
+     * Returns the meal at the specified index
+     * 
+     * @param index index of meal
+     * @return meal
+     */
+    public Meal getMeal(int index) {
+        return meals.get(index);
+    }
+
+    /**
+     * Returns a list of meals
+     * 
+     * @return meal list
+     */
     public List<Meal> getMeals() {
         return meals;
     }
 
+    /**
+     * Returns a list of drink
+     * 
+     * @return drink list
+     */
     public List<Drink> getDrinks() {
         return drinks;
     }
