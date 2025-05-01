@@ -23,7 +23,7 @@ public class UserInputProcessor {
      */
     public void newItemPrompt() {
         while (true) {
-            System.out.print("Would you like to add a meal or drink? ('meal' or 'drink' or 'no'): ");
+            System.out.print("Would you like to add a meal or drink? (meal/drink/no): ");
             String x = s.nextLine().toLowerCase();
 
             if (x.equals("meal")) {
@@ -35,6 +35,8 @@ public class UserInputProcessor {
             } else if (x.equals("no")) {
                 System.out.println();
                 break;
+            } else {
+                System.out.println("Input invalid try again");
             }
         }
     }
@@ -44,7 +46,7 @@ public class UserInputProcessor {
      */
     public void isHealthyPrompt() {
         while (true) {
-            System.out.print("Would you like to check if your day or meal was healthy? ('day' or 'meal' or 'no'): ");
+            System.out.print("Would you like to check if your day or meal was healthy? (day/meal/no): ");
             String x = s.nextLine().toLowerCase();
 
             if (x.equals("day")) {
@@ -55,6 +57,7 @@ public class UserInputProcessor {
                 x = "";
             } else if (x.equals("no")) {
                 System.out.println();
+                System.out.println("Good lucn on the rest of your diet!");
                 break;
             }
         }
@@ -64,8 +67,20 @@ public class UserInputProcessor {
      * Prompts the user for elements of their meal then adds the meal
      */
     public void addNewMeal() {
-        System.out.print("What type of meal are you having? ('breakfast' or 'lunch' or 'dinner' or 'snack'): ");
-        String type = s.nextLine().toLowerCase();
+        String type = "";
+
+        while (true) {
+            System.out.print("What type of meal are you having? (breakfast/lunch/dinner/snack): ");
+            type = s.nextLine().toLowerCase();
+
+            if (!(type.equals("breakfast") || type.equals("lunch") || type.equals("dinner") || type.equals("snack"))) {
+                type = "";
+                System.out.println("Input invalid try again");
+            } else {
+                break;
+            }
+        }
+
         System.out.print("Enter the name of your meal: ");
         String name = s.nextLine();
         System.out.print("Enter the time that you ate your meal at: ");
@@ -115,7 +130,7 @@ public class UserInputProcessor {
      */
     public void getHealthReason(int meal) {
         System.out.println();
-        System.out.print("Would you like to know why your meal is unhealthy? ('yes' or 'no') ");
+        System.out.print("Would you like to know why your meal is unhealthy? (yes/no) ");
         String answer = s.nextLine().toLowerCase();
 
         if (answer.equals("yes")) {
