@@ -23,7 +23,7 @@ public class UserInputProcessor {
      */
     public void newItemPrompt() {
         while (true) {
-            System.out.print("Would you like to add a meal or drink? (meal/drink/no): ");
+            System.out.print("Add meal or drink (meal/drink/no): ");
             String x = s.nextLine().toLowerCase();
 
             if (x.equals("meal")) {
@@ -46,7 +46,7 @@ public class UserInputProcessor {
      */
     public void isHealthyPrompt() {
         while (true) {
-            System.out.print("Would you like to check if your day or meal was healthy? (day/meal/no): ");
+            System.out.print("Check health of day or meal (day/meal/no): ");
             String x = s.nextLine().toLowerCase();
 
             if (x.equals("day")) {
@@ -57,8 +57,10 @@ public class UserInputProcessor {
                 x = "";
             } else if (x.equals("no")) {
                 System.out.println();
-                System.out.println("Good lucn on the rest of your diet!");
+                System.out.println("Program ended");
                 break;
+            } else {
+                System.out.println("Input invalid try again");
             }
         }
     }
@@ -67,10 +69,49 @@ public class UserInputProcessor {
      * Prompts the user for elements of their meal then adds the meal
      */
     public void addNewMeal() {
+        String type = getMealType();
+        System.out.print("Enter meal name: ");
+        String name = s.nextLine();
+        System.out.print("Enter meal time: ");
+        String time = s.nextLine();
+        int calories = inputAboveZero("Enter meal calories: ", 10000);
+        int foodGroups = inputAboveZero("Enter meal foodgroups: ", 4);
+
+        track.addMeal(track.makeMeal(type, name, time, calories, foodGroups));
+        System.out.println("Meal added");
+    }
+
+    /**
+     * Gets integer value from user until value is above zero
+     * 
+     * @param prompt prompt for user
+     * @return user input
+     */
+    public int inputAboveZero(String prompt, int max) {
+        int value = 0;
+        while (true) {
+            System.out.print(prompt);
+            value = Integer.parseInt(s.nextLine());
+
+            if (value < 1 && value > max) {
+                System.out.println("Input invalid try again");
+            } else {
+                break;
+            }
+        }
+        return value;
+    }
+
+    /**
+     * Returns meal type from user and checks if valid
+     * 
+     * @return meal type
+     */
+    public String getMealType() {
         String type = "";
 
         while (true) {
-            System.out.print("What type of meal are you having? (breakfast/lunch/dinner/snack): ");
+            System.out.print("Enter meal type (breakfast/lunch/dinner/snack): ");
             type = s.nextLine().toLowerCase();
 
             if (!(type.equals("breakfast") || type.equals("lunch") || type.equals("dinner") || type.equals("snack"))) {
@@ -81,30 +122,20 @@ public class UserInputProcessor {
             }
         }
 
-        System.out.print("Enter the name of your meal: ");
-        String name = s.nextLine();
-        System.out.print("Enter the time that you ate your meal at: ");
-        String time = s.nextLine();
-        System.out.print("Enter the amount of calories in your meal: ");
-        int calories = Integer.parseInt(s.nextLine());
-        System.out.print("Enter the amount of foodgroups in your meal: ");
-        int foodGroups = Integer.parseInt(s.nextLine());
-
-        track.addMeal(track.makeMeal(type, name, time, calories, foodGroups));
-        System.out.println("Your meal has been added!");
+        return type;
     }
 
     /**
      * Prompts the user for elements of their drink then adds the drink
      */
     public void addNewDrink() {
-        System.out.print("Enter the name of your drink: ");
+        System.out.print("Enter drink name: ");
         String name = s.nextLine();
-        System.out.print("Enter the size of your drink (milliliters): ");
+        System.out.print("Enter drink size (milliliters): ");
         int volume = Integer.parseInt(s.nextLine());
 
         track.addDrink(track.makeDrink(name, volume));
-        System.out.println("Your drink has been added!");
+        System.out.println("Drink added");
     }
 
     /**
@@ -113,8 +144,7 @@ public class UserInputProcessor {
      * @return if the meal is healthy or not
      */
     public void isMealHealthy() {
-        System.out.print("Enter the number of the meal you would like to check: ");
-        int meal = Integer.parseInt(s.nextLine()) - 1;
+        int meal = inputAboveZero("Enter meal number: ", track.getMeals().size() - 1) - 1;
         System.out.println();
         boolean health = track.printMealHealth(meal);
         if (!health) {
@@ -130,11 +160,18 @@ public class UserInputProcessor {
      */
     public void getHealthReason(int meal) {
         System.out.println();
-        System.out.print("Would you like to know why your meal is unhealthy? (yes/no) ");
-        String answer = s.nextLine().toLowerCase();
+        while (true) {
+            System.out.print("Reason meal is unhealthy? (yes/no): ");
+            String answer = s.nextLine().toLowerCase();
 
-        if (answer.equals("yes")) {
-            System.out.println(track.getMeals().get(meal).healthReason());
+            if (answer.equals("yes")) {
+                System.out.println(track.getMeals().get(meal).healthReason());
+                break;
+            } else if (answer.equals("no")) {
+                break;
+            } else {
+                System.out.println("Input invalid try again");
+            }
         }
     }
 }
