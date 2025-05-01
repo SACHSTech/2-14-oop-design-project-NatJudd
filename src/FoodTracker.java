@@ -1,12 +1,15 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
- * UserInputProcessor class: has methods to prompt and recieve user input.
+ * The tracker class: represents all the meals and drinks a person has in a day
  * 
  * @author NJudd
  */
-public class UserInputProcessor {
-    private Tracker track = new Tracker();
+public class FoodTracker {
+    private List<Meal> meals = new ArrayList<>();
+    private List<Drink> drinks = new ArrayList<>();
     private Scanner s = new Scanner(System.in);
 
     /**
@@ -14,8 +17,131 @@ public class UserInputProcessor {
      */
     public void promptUser() {
         newItemPrompt();
-        track.printTracker();
+        printTracker();
         isHealthyPrompt();
+    }
+
+    /**
+     * Adds a meal object to the tracker
+     * 
+     * @param e meal
+     */
+    public void addMeal(Meal e) {
+        meals.add(e);
+    }
+
+    /**
+     * Adds a drink object to the tracker
+     * 
+     * @param e drink
+     */
+    public void addDrink(Drink e) {
+        drinks.add(e);
+    }
+
+    /**
+     * Turns String and int inputs into a meal object
+     * 
+     * @param type       meal type
+     * @param name       meal name
+     * @param time       meal time
+     * @param calories   meal calories
+     * @param foodGroups meal foodgroups
+     * @return meal object
+     */
+    public Meal makeMeal(String type, String name, String time, int calories, int foodGroups) {
+        Meal meal = null;
+        if (type.equals("breakfast")) {
+            meal = new Breakfast(name, time, calories, foodGroups);
+        } else if (type.equals("lunch")) {
+            meal = new Lunch(name, time, calories, foodGroups);
+        } else if (type.equals("dinner")) {
+            meal = new Dinner(name, time, calories, foodGroups);
+        } else if (type.equals("snack")) {
+            meal = new Snack(name, time, calories, foodGroups);
+        }
+
+        return meal;
+    }
+
+    /**
+     * Turns String and int inputs into a drink object
+     * 
+     * @param name   drink name
+     * @param volume drink volume
+     * @return drink object
+     */
+    public Drink makeDrink(String name, int volume) {
+        return new Drink(name, volume);
+    }
+
+    /**
+     * Prints all the meals and drinks the user added
+     */
+    public void printTracker() {
+        System.out.println("Meals: ");
+
+        for (int i = 0; i < meals.size(); i++) {
+            System.out.println(i + 1 + ". " + meals.get(i));
+        }
+
+        System.out.println();
+        System.out.println("Drinks: ");
+
+        for (int i = 0; i < drinks.size(); i++) {
+            System.out.println(drinks.get(i));
+        }
+
+        System.out.println();
+    }
+
+    /**
+     * Checks if what the user ate is healthy or not
+     * 
+     * @return if the day is healthy or not
+     */
+    public boolean isDayHealthy() {
+        int healthy = 0;
+        int unhealthy = 0;
+
+        for (int i = 0; i < meals.size(); i++) {
+            if (meals.get(i).isHealthy()) {
+                healthy += 1;
+            } else {
+                unhealthy += 1;
+            }
+        }
+
+        for (int i = 0; i < drinks.size(); i++) {
+            if (drinks.get(i).isWater()) {
+                healthy += 1;
+            } else {
+                unhealthy += 1;
+            }
+        }
+
+        if (healthy >= unhealthy) {
+            System.out.println("You ate healthy today!");
+            return true;
+        } else {
+            System.out.println("You might want to start thinking about eating healthier :(");
+            return false;
+        }
+    }
+
+    /**
+     * Checks if the meal a user chooses is healthy
+     * 
+     * @return if the meal is healthy or not
+     */
+    public boolean printMealHealth(int index) {
+        if (getMeal(index).isHealthy()) {
+            System.out.println(getMeal(index) + " is healthy");
+            return true;
+        } else {
+            System.out.println(getMeal(index) + " is unhealthy");
+            return false;
+        }
     }
 
     /**
@@ -50,7 +176,7 @@ public class UserInputProcessor {
             String x = s.nextLine().toLowerCase();
 
             if (x.equals("day")) {
-                track.isDayHealthy();
+                isDayHealthy();
                 x = "";
             } else if (x.equals("meal")) {
                 isMealHealthy();
@@ -74,10 +200,10 @@ public class UserInputProcessor {
         String name = s.nextLine();
         System.out.print("Enter meal time: ");
         String time = s.nextLine();
-        int calories = inputAboveZero("Enter meal calories: ", 10000);
-        int foodGroups = inputAboveZero("Enter meal foodgroups: ", 4);
+        int calories = checkInputRange("Enter meal calories: ", 10000);
+        int foodGroups = checkInputRange("Enter meal foodgroups: ", 4);
 
-        track.addMeal(track.makeMeal(type, name, time, calories, foodGroups));
+        addMeal(makeMeal(type, name, time, calories, foodGroups));
         System.out.println("Meal added");
     }
 
@@ -87,13 +213,13 @@ public class UserInputProcessor {
      * @param prompt prompt for user
      * @return user input
      */
-    public int inputAboveZero(String prompt, int max) {
+    public int checkInputRange(String prompt, int max) {
         int value = 0;
         while (true) {
             System.out.print(prompt);
             value = Integer.parseInt(s.nextLine());
 
-            if (value < 1 && value > max) {
+            if (value < 1 || value > max) {
                 System.out.println("Input invalid try again");
             } else {
                 break;
@@ -134,7 +260,7 @@ public class UserInputProcessor {
         System.out.print("Enter drink size (milliliters): ");
         int volume = Integer.parseInt(s.nextLine());
 
-        track.addDrink(track.makeDrink(name, volume));
+        addDrink(makeDrink(name, volume));
         System.out.println("Drink added");
     }
 
@@ -144,9 +270,9 @@ public class UserInputProcessor {
      * @return if the meal is healthy or not
      */
     public void isMealHealthy() {
-        int meal = inputAboveZero("Enter meal number: ", track.getMeals().size() - 1) - 1;
+        int meal = checkInputRange("Enter meal number: ", meals.size()) - 1;
         System.out.println();
-        boolean health = track.printMealHealth(meal);
+        boolean health = printMealHealth(meal);
         if (!health) {
             getHealthReason(meal);
         }
@@ -165,7 +291,7 @@ public class UserInputProcessor {
             String answer = s.nextLine().toLowerCase();
 
             if (answer.equals("yes")) {
-                System.out.println(track.getMeals().get(meal).healthReason());
+                System.out.println(meals.get(meal).healthReason());
                 break;
             } else if (answer.equals("no")) {
                 break;
@@ -173,5 +299,15 @@ public class UserInputProcessor {
                 System.out.println("Input invalid try again");
             }
         }
+    }
+
+    /**
+     * Returns the meal at the specified index
+     * 
+     * @param index index of meal
+     * @return meal
+     */
+    public Meal getMeal(int index) {
+        return meals.get(index);
     }
 }
