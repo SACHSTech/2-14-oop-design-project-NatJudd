@@ -43,6 +43,6 @@ public class Snack extends Meal {
 
     @Override
     public String toString() {
-        return "[" + getTime() + "] Snack: " + getName() + "(" + getCalories() + ")";
+        return "Snack: " + getName() + " (" + getCalories() + ") [" + getTime() + "]";
     }
 }

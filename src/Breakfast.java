@@ -34,10 +34,10 @@ public class Breakfast extends Meal {
         String reason = "";
         if (getCalories() > healthCalsMax) {
             reason += "\nYour meal is " + (getCalories() - healthCalsMax) + " calories over the maximum";
-        } 
+        }
         if (getCalories() < healthCalsMin) {
             reason += "\nYour meal is " + (healthCalsMin - getCalories()) + " calories under the minimum";
-        } 
+        }
         if (getFoodGroups() < healthFoodGroups) {
             reason += "\nYour meal has " + (healthFoodGroups - getFoodGroups()) + " too little foodgroups";
         }
@@ -47,6 +47,6 @@ public class Breakfast extends Meal {
 
     @Override
     public String toString() {
-        return "[" + getTime() + "] Breakfast: " + getName() + "(" + getCalories() + ")";
+        return "Breakfast: " + getName() + " (" + getCalories() + ") [" + getTime() + "]";
     }
 }
