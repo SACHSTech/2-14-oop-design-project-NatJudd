@@ -67,10 +67,10 @@ public class FoodTracker {
         }
 
         if (healthy >= unhealthy) {
-            System.out.println("You ate healthy today!");
+            System.out.println("Your day was healthy");
             return true;
         } else {
-            System.out.println("You might want to start thinking about eating healthier :(");
+            System.out.println("Your day was unhealthy");
             return false;
         }
     }
@@ -94,28 +94,28 @@ public class FoodTracker {
     }
 
     /**
-     * Turns String and int inputs into a meal object
+     * Turns user inputs into a meal object
      * 
      * @param type       meal type
      * @param name       meal name
      * @param time       meal time
      * @param calories   meal calories
-     * @param foodGroups meal foodgroups
+     * @param foodgroups meal foodgroups
      * @return meal object
      */
-    public Meal createMeal(String type, String name, String time, int calories, int foodGroups) {
-        Meal meal = null;
-        if (type.equals("breakfast")) {
-            meal = new Breakfast(name, time, calories, foodGroups);
-        } else if (type.equals("lunch")) {
-            meal = new Lunch(name, time, calories, foodGroups);
-        } else if (type.equals("dinner")) {
-            meal = new Dinner(name, time, calories, foodGroups);
-        } else if (type.equals("snack")) {
-            meal = new Snack(name, time, calories, foodGroups);
+    public Meal createMeal(MealType type, String name, String time, int calories, int foodgroups) {
+        switch (type) {
+            case BREAKFAST:
+                return new Breakfast(name, time, calories, foodgroups);
+            case LUNCH:
+                return new Lunch(name, time, calories, foodgroups);
+            case DINNER:
+                return new Dinner(name, time, calories, foodgroups);
+            case SNACK:
+                return new Snack(name, time, calories, foodgroups);
+            default:
+                throw new IllegalArgumentException("Input invalid try again");
         }
-
-        return meal;
     }
 
     /**
@@ -157,7 +157,7 @@ public class FoodTracker {
      */
     public void promptForHealthCheck() {
         while (true) {
-            System.out.print("Check health of day or meal (day/meal/no): ");
+            System.out.print("Check health of day or meal (day/meal/exit): ");
             String x = s.nextLine().toLowerCase();
 
             if (x.equals("day")) {
@@ -166,9 +166,9 @@ public class FoodTracker {
             } else if (x.equals("meal")) {
                 isMealHealthy();
                 x = "";
-            } else if (x.equals("no")) {
+            } else if (x.equals("exit")) {
                 System.out.println();
-                System.out.println("Program ended");
+                System.out.println("Program exited");
                 break;
             } else {
                 System.out.println("Input invalid try again");
@@ -180,15 +180,15 @@ public class FoodTracker {
      * Prompts the user for elements of their meal then adds the meal
      */
     public void addNewMeal() {
-        String type = promptForMealType();
+        MealType type = promptForMealType();
         System.out.print("Enter meal name: ");
         String name = s.nextLine();
         System.out.print("Enter meal time: ");
         String time = s.nextLine();
         int calories = promptForValidNumber("Enter meal calories: ", 10000);
-        int foodGroups = promptForValidNumber("Enter meal foodgroups: ", 4);
+        int foodgroups = promptForValidNumber("Enter meal foodgroups: ", 4);
 
-        addMeal(createMeal(type, name, time, calories, foodGroups));
+        addMeal(createMeal(type, name, time, calories, foodgroups));
         System.out.println("Meal added");
     }
 
@@ -216,6 +216,7 @@ public class FoodTracker {
         boolean health = logMealHealth(meal);
         if (!health) {
             explainUnhealthyMeal(meal);
+            System.out.println();
         }
     }
 
@@ -243,7 +244,7 @@ public class FoodTracker {
     public void explainUnhealthyMeal(int meal) {
         System.out.println();
         while (true) {
-            System.out.print("Reason meal is unhealthy? (yes/no): ");
+            System.out.print("Get reason meal is unhealthy (yes/no): ");
             String answer = s.nextLine().toLowerCase();
 
             if (answer.equals("yes")) {
@@ -268,9 +269,10 @@ public class FoodTracker {
     }
 
     /**
-     * Gets integer value from user until value is above zero
+     * Prompts for int value until above 0 and other conditions are met
      * 
      * @param prompt prompt for user
+     * @param max    max value
      * @return user input
      */
     public int promptForValidNumber(String prompt, int max) {
@@ -293,21 +295,23 @@ public class FoodTracker {
      * 
      * @return meal type
      */
-    public String promptForMealType() {
-        String type = "";
-
+    public MealType promptForMealType() {
         while (true) {
             System.out.print("Enter meal type (breakfast/lunch/dinner/snack): ");
-            type = s.nextLine().toLowerCase();
+            String input = s.nextLine().trim().toLowerCase();
 
-            if (!(type.equals("breakfast") || type.equals("lunch") || type.equals("dinner") || type.equals("snack"))) {
-                type = "";
-                System.out.println("Input invalid try again");
+            // Manual check instead of try-catch
+            if (input.equals(MealType.BREAKFAST.getName())) {
+                return MealType.BREAKFAST;
+            } else if (input.equals(MealType.LUNCH.getName())) {
+                return MealType.LUNCH;
+            } else if (input.equals(MealType.DINNER.getName())) {
+                return MealType.DINNER;
+            } else if (input.equals(MealType.SNACK.getName())) {
+                return MealType.SNACK;
             } else {
-                break;
+                System.out.println("Input invalid try again");
             }
         }
-
-        return type;
     }
 }
