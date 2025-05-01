@@ -50,16 +50,16 @@ public class FoodTracker {
         int healthy = 0;
         int unhealthy = 0;
 
-        for (int i = 0; i < meals.size(); i++) {
-            if (meals.get(i).isHealthy()) {
+        for (Meal meal : meals) {
+            if (meal.isHealthy()) {
                 healthy += 1;
             } else {
                 unhealthy += 1;
             }
         }
 
-        for (int i = 0; i < drinks.size(); i++) {
-            if (drinks.get(i).isWater()) {
+        for (Drink drink : drinks) {
+            if (drink.isWater()) {
                 healthy += 1;
             } else {
                 unhealthy += 1;
