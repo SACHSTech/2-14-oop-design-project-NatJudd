@@ -7,7 +7,7 @@ public abstract class Meal {
     private String name;
     private String time;
     private int calories;
-    private int foodGroups;
+    private int foodgroups;
 
     /**
      * Constructor
@@ -15,13 +15,13 @@ public abstract class Meal {
      * @param name       meal name
      * @param time       meal time
      * @param calories   amount of calories
-     * @param foodGroups amount of foodgroups
+     * @param foodgroups amount of foodgroups
      */
-    public Meal(String name, String time, int calories, int foodGroups) {
+    public Meal(String name, String time, int calories, int foodgroups) {
         this.name = name;
         this.time = time;
         this.calories = calories;
-        this.foodGroups = foodGroups;
+        this.foodgroups = foodgroups;
     }
 
     /**
@@ -72,7 +72,7 @@ public abstract class Meal {
      * 
      * @return amount of foodgroups
      */
-    public int getFoodGroups() {
-        return foodGroups;
+    public int getFoodgroups() {
+        return foodgroups;
     }
 }
