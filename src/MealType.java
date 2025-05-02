@@ -1,3 +1,8 @@
+/**
+ * Represents the different types of meals
+ * 
+ * @author NJudd
+ */
 public enum MealType {
     BREAKFAST("breakfast"),
     LUNCH("lunch"),
