@@ -117,8 +117,7 @@ public class UserFoodTracker extends FoodTracker {
     public void addNewDrink() {
         System.out.print("Enter drink name: ");
         String name = s.nextLine();
-        System.out.print("Enter drink size (milliliters): ");
-        int volume = Integer.parseInt(s.nextLine());
+        int volume = promptForValidNumber("Enter drink size (milliliters): ", 10000);
 
         addDrink(createDrink(name, volume));
         System.out.println("Drink added");
