@@ -38,7 +38,19 @@ public abstract class Meal {
      */
     public abstract String healthReason();
 
-    public abstract String toString();
+    /**
+     * Checks if a meal is healthy
+     * 
+     * @return meal health
+     */
+    public void logMealHealth() {
+        if (isHealthy()) {
+            System.out.println(this + " is healthy");
+        } else {
+            System.out.println(this + " is unhealthy");
+            System.out.println(this.healthReason());
+        }
+    }
 
     /**
      * Returns the name of a meal
@@ -75,4 +87,6 @@ public abstract class Meal {
     public int getFoodgroups() {
         return foodgroups;
     }
+
+    public abstract String toString();
 }
