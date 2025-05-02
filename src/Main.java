@@ -6,56 +6,35 @@
 public class Main {
     public static void main(String[] args) {
         // User input
-        // FoodTracker UserFoodTracker = new FoodTracker();
+        // UserFoodTracker UserFoodTracker = new UserFoodTracker();
         // UserFoodTracker.runFoodTracker();
 
         // No User input
-        testFoodTracker();
-    }
-
-    /**
-     * Tests the features of the FoodTracker class
-     */
-    public static void testFoodTracker() {
         FoodTracker test = new FoodTracker();
 
-        addItems(test);
+        Meal breakfast = new Breakfast("Cereal with fruit", "8:30am", 325, 3);
+        Meal lunch = new Lunch("Chicken sandwich and side yogurt", "12:45pm", 510, 3);
+        Meal dinner = new Dinner("Pasta and meatballs with side salad", "6:00pm", 670, 3);
+        Meal snack = new Snack("Chips", "8:30pm", 390, 1);
+        Drink water = new Drink("Water", 1000);
+        Drink juice = new Drink("Apple juice", 250);
+        Drink coke = new Drink("Coke zero", 350);
+
+        test.addMeal(breakfast);
+        test.addMeal(lunch);
+        test.addMeal(dinner);
+        test.addMeal(snack);
+        test.addDrink(water);
+        test.addDrink(juice);
+        test.addDrink(coke);
 
         test.printTracker();
 
-        test.logMealHealth(0);
-        test.logMealHealth(1);
-        test.logMealHealth(2);
-        test.logMealHealth(3);
+        breakfast.logMealHealth();
+        lunch.logMealHealth();
+        dinner.logMealHealth();
+        snack.logMealHealth();
 
         test.checkDailyHealth();
-    }
-
-    /**
-     * Adds test meals and drinks to a food tracker
-     * 
-     * @param test food tracker
-     */
-    public static void addItems(FoodTracker test) {
-        Meal breakfast = new Breakfast("Cereal with fruit", "8:30am", 325, 3);
-        test.addMeal(breakfast);
-
-        Meal lunch = new Lunch("Chicken sandwich and side yogurt", "12:45pm", 510, 3);
-        test.addMeal(lunch);
-
-        Meal dinner = new Dinner("Pasta and meatballs with side salad", "6:00pm", 670, 3);
-        test.addMeal(dinner);
-
-        Meal snack = new Snack("Chips", "8:30pm", 390, 1);
-        test.addMeal(snack);
-
-        Drink water = new Drink("Water", 1000);
-        test.addDrink(water);
-
-        Drink juice = new Drink("Apple juice", 250);
-        test.addDrink(juice);
-
-        Drink coke = new Drink("Coke zero", 350);
-        test.addDrink(coke);
     }
 }
