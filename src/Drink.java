@@ -42,7 +42,7 @@ public class Drink {
      * @return true if water else false
      */
     public boolean isWater() {
-        return name.toLowerCase() == "water";
+        return name.toLowerCase().equals("water");
     }
 
     public String toString() {
