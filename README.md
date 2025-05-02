@@ -6,4 +6,4 @@ See instructions [here](INSTRUCTIONS.md) for details.
 ![alt text](FoodTracker_UML.png)  
 
 ## Summary
-This design models a person's daily meal system. It will handle the type of meal (breakfast, lunch, dinner and snack) and the meal's details (calories, food groups, time of eating). The system will determine if the user's meal is balenced / healthy.
+This system allows users to track there daily food and drink intake. It then is capable of calculating if the user's meals are healthy and if they ate healthy that day. You are able to add meals and drinks to a FoodTracker object manually as well as the class's other features. You are also able to use a prompt system to add meals, drinks, and all the other features of the class using a UserFoodTracker object. Although the healthy and unhealthy calculations are simple they are meant as a general guide for the user to follow to maintain a healthy diet daily.
